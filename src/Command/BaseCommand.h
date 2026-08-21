@@ -9,10 +9,11 @@
 
 class BaseCommand {
     public:
+    explicit BaseCommand(std::vector<std::string> args);
     virtual ~BaseCommand() = default;
     virtual void execute() = 0;
 
-    private:
+    protected:
     std::vector<std::string> args;
 
 };

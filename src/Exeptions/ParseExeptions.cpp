@@ -4,6 +4,6 @@
 
 #include <stdexcept>
 
-class ParseExeptions :std::runtime_error {
+class ParseExeptions :public std::runtime_error {
     explicit ParseExeptions(const std::string& msg) : std::runtime_error(msg) {}
 };

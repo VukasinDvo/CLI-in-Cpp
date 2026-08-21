@@ -6,15 +6,24 @@
 #define OOP1PROJEKAT_PARSER_H
 #include <string>
 #include <vector>
+#include "Tokenizer.h"
+#include "TokenType.h"
 class BaseCommand;
 
 class Parser {
     public:
-
     BaseCommand* parseCmd(std::string token);
 
 private:
-    std::vector<std::string> tokenize(std::string line);
+    std::vector<Token> tokens;
+    size_t pos;
+
+    BaseCommand* parsePipeline(std::string token);
+    BaseCommand* parseCommand(std::string token);
+
+    const Token& peek() const;
+    bool check(TokenType t) const;
+    void advance();
 
 
 };
