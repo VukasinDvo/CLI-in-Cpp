@@ -4,11 +4,19 @@
 
 #ifndef OOP1PROJEKAT_ECHOCOMMAND_H
 #define OOP1PROJEKAT_ECHOCOMMAND_H
-#include "BaseCommand.h"
+#include <string>
+#include <vector>
+
+#include "../Command/BaseCommand.h"
 
 class EchoCommand : public BaseCommand {
 public:
-    explicit EchoCommand(std::vector<std::string> args);
+
+
+    using BaseCommand::BaseCommand;
     void execute() override;
+    static BaseCommand* create(ParsedCommand parsed,std::unique_ptr<std::istream> in,std::unique_ptr<std::ostream> out) {
+        return new EchoCommand(std::move(parsed), std::move(in), std::move(out));
+    }
 };
 #endif //OOP1PROJEKAT_ECHOCOMMAND_H

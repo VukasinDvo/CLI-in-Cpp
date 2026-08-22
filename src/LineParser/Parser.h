@@ -10,8 +10,10 @@
 #include "TokenType.h"
 class BaseCommand;
 
+
 class Parser {
     public:
+    Parser();
     BaseCommand* parseCmd(std::string token);
 
 private:

@@ -1,16 +1,30 @@
 #include <iostream>
+#include "src/LineParser/ParsedCommand.h"
+#include "src/IOResolver/OutputResolver.h"
 
-// TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+#include "src/Command/BaseCommand.h"
+#include "src/CommandFactory/CommandFactory.h"
+
+
 int main() {
-    // TIP Press <shortcut actionId="RenameElement"/> when your caret is at the <b>lang</b> variable name to see how CLion can help you rename it.
-    auto lang = "C++";
-    std::cout << "Hello and welcome to " << lang << "!\n";
+    CommandFactory* factory=new CommandFactory();
 
-    for (int i = 1; i <= 5; i++) {
-        // TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        std::cout << "i = " << i << std::endl;
+    // Test 1: echo bez argumenta (trebalo bi da cita sa std::cin)
+    // preskacemo ovaj test za sad, testirajmo prvo laksi slucaj
+
+    // Test 2: echo sa citiranim argumentom
+    ParsedCommand parsed;
+    parsed.name = "echo";
+    parsed.argument = "Zdravo svete";
+    parsed.isQuoted = true;
+
+    try {
+        BaseCommand* cmd = factory->create(parsed);
+        cmd->execute();   // ocekivano: ispisuje "Zdravo svete"
+        delete cmd;
+    } catch (const std::exception& e) {
+        std::cerr << "Greska: " << e.what() << "\n";
     }
 
     return 0;
-    // TIP See CLion help at <a href="https://www.jetbrains.com/help/clion/">jetbrains.com/help/clion/</a>. Also, you can try interactive lessons for CLion by selecting 'Help | Learn IDE Features' from the main menu.
 }

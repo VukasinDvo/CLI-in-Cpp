@@ -4,7 +4,14 @@
 
 #include "BaseCommand.h"
 
+BaseCommand::BaseCommand(ParsedCommand parsed,
+                          std::unique_ptr<std::istream> ownedInput,
+                          std::unique_ptr<std::ostream> ownedOutput)
+    : parsed(std::move(parsed)),
+      ownedInput(std::move(ownedInput)),
+      ownedOutput(std::move(ownedOutput)) {
 
-BaseCommand::BaseCommand(std::vector<std::string> args)
-    : args(std::move(args)) {}
+    inputStream  = this->ownedInput  ? this->ownedInput.get()  : &std::cin;
+    outputStream = this->ownedOutput ? this->ownedOutput.get() : &std::cout;
+}
 

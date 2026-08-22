@@ -1,17 +1,19 @@
-#include "Parser.h"
+
 //
 // Created by vladi on 8/19/2026.
 //
+#include "Parser.h"
+#
 BaseCommand* Parser::parseCmd(const std::string& line) {
     Tokenizer tokenizer(line);
-    tokens_ = tokenizer.tokenize();
-    pos_ = 0;
+    tokens = tokenizer.tokenize();
+    pos = 0;
 
     return parsePipeline();
 }
 
 const Token& Parser::peek() const {
-    return tokens_[pos_];
+    return tokens[pos];
 }
 
 bool Parser::check(TokenType t) const {
@@ -19,8 +21,8 @@ bool Parser::check(TokenType t) const {
 }
 
 void Parser::advance() {
-    if (pos_ < tokens_.size() - 1) {
-        pos_++;
+    if (pos < tokens.size() - 1) {
+        pos++;
     }
 }
 

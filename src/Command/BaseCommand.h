@@ -4,17 +4,35 @@
 
 #ifndef OOP1PROJEKAT_BASECOMMAND_H
 #define OOP1PROJEKAT_BASECOMMAND_H
+#include <functional>
 #include <string>
 #include <vector>
 
+
+
+#include <iostream>
+#include <memory>
+#include "../LineParser/ParsedCommand.h"
+
+
 class BaseCommand {
-    public:
-    explicit BaseCommand(std::vector<std::string> args);
+public:
+    using FunWraper=std::function<BaseCommand*(ParsedCommand, std::unique_ptr<std::istream>, std::unique_ptr<std::ostream>)>;
+    BaseCommand(ParsedCommand parsed,
+                std::unique_ptr<std::istream> ownedInput,
+                std::unique_ptr<std::ostream> ownedOutput);
+
     virtual ~BaseCommand() = default;
     virtual void execute() = 0;
 
-    protected:
-    std::vector<std::string> args;
+protected:
+    ParsedCommand parsed;
+    std::istream* inputStream;
+    std::ostream* outputStream;
 
+private:
+    std::unique_ptr<std::istream> ownedInput;
+    std::unique_ptr<std::ostream> ownedOutput;
 };
+
 #endif //OOP1PROJEKAT_BASECOMMAND_H
