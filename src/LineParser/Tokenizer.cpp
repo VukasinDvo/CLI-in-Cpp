@@ -5,7 +5,7 @@
 
 #include "TokenType.h"
 
-Tokenizer::Tokenizer(std::string &line): line(line),pos(0) {}
+Tokenizer::Tokenizer(const std::string &line): line(line),pos(0) {}
 
 char Tokenizer::peekNextChar() {
     return (pos+1 <line.size()) ? line[pos+1]:'\0';
@@ -64,6 +64,33 @@ std::string Tokenizer::readWord() {
     return result;
 }
 
-std::string Tokenizer::tokenize() {
+std::vector<Token> Tokenizer::tokenize() {
+    std::vector<Token> tokens;
+    while (true) {
+        skipWhitespace();
+        if (pos >= line.size()) break;
+        char c = line[pos];
+        if (c == '|') { tokens.push_back({TokenType::PIPE, "|", false});
+            pos++;
+            continue; }
+        if (c == '>') {
+            if (peekNextChar() == '>') {
+                tokens.push_back({TokenType::REDIRECT_APPEND, ">>", false});
+                pos += 2;
+            } else {
+                tokens.push_back({TokenType::REDIRECT_OUT, ">", false});
+                pos++;
+            }
+            continue;
+        }
+        if (c == '<') { tokens.push_back({TokenType::REDIRECT_IN,
+            "<", false});
+            pos++;
+            continue; }
 
+        bool wasQuoted = (c == '"' || c == '\'');
+        tokens.push_back({TokenType::WORD, readWord(), wasQuoted});
+    }
+    tokens.push_back({TokenType::END, "", false});
+    return tokens;
 }

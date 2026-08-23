@@ -4,6 +4,6 @@
 
 #include "OutputResolver.h"
 
-std::unique_ptr<std::ostream> *OutputResolver::resolve(const ParsedCommand &cmd) {
+std::unique_ptr<std::ostream> OutputResolver::resolve(const ParsedCommand &cmd) {
     return nullptr;
 }

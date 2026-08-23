@@ -3,9 +3,12 @@
 //
 
 #include "PipelineCommand.h"
+#include "BaseCommand.h"
+#include <vector>
+
 
 PipelineCommand::PipelineCommand(std::vector<BaseCommand*> commands)
-    : BaseCommand({}), commands(std::move(commands)) {}
+    : BaseCommand(ParsedCommand{}, nullptr, nullptr), commands(std::move(commands)) {}
 
 PipelineCommand::~PipelineCommand() {
     for (auto* cmd : commands) {
@@ -14,6 +17,5 @@ PipelineCommand::~PipelineCommand() {
 }
 
 void PipelineCommand::execute() {
-    // ovde ide fork()/pipe()/dup2() logika povezivanja komandi
-    // (razradicemo kad dodjemo do izvrsavanja)
+
 }

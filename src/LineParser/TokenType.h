@@ -12,11 +12,14 @@ enum class TokenType {
     PIPE,
     REDIRECT_IN,
     REDIRECT_OUT,
+    REDIRECT_APPEND,
+    END,
 };
 
 struct Token {
     TokenType type;
     std::string text;
+    bool quoted=false;
 };
 
 struct Redirection {

@@ -5,12 +5,15 @@
 #ifndef OOP1PROJEKAT_TOKENIZER_H
 #define OOP1PROJEKAT_TOKENIZER_H
 #include <string>
+#include <vector>
+
+#include "TokenType.h"
 
 class Tokenizer {
     public:
-    explicit Tokenizer(std::string &line);
+    explicit Tokenizer(const std::string &line);
 
-    std::string tokenize();
+    std::vector<Token> tokenize();
 
     private:
     std::string line;

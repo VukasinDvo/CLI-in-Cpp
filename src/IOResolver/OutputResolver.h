@@ -12,6 +12,6 @@
 
 class OutputResolver {
     public:
-    static std::unique_ptr<std::ostream> *resolve(const ParsedCommand &cmd);
+    static std::unique_ptr<std::ostream> resolve(const ParsedCommand &cmd);
 };
 #endif //OOP1PROJEKAT_OUTPUTRESOLVER_H

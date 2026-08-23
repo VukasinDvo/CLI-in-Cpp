@@ -1,9 +1,18 @@
-
 //
 // Created by vladi on 8/19/2026.
 //
+
 #include "Parser.h"
-#
+
+#include "Tokenizer.h"
+#include "../Command/BaseCommand.h"
+#include "../Command/PipelineCommand.h"
+#include "../CommandFactory/CommandFactory.h"
+#include "../Exeptions/ParseExeptions.h"
+
+Parser::Parser(CommandFactory& factory)
+    : factory_(factory), pos(0) {}
+
 BaseCommand* Parser::parseCmd(const std::string& line) {
     Tokenizer tokenizer(line);
     tokens = tokenizer.tokenize();
@@ -42,17 +51,31 @@ BaseCommand* Parser::parsePipeline() {
 }
 
 BaseCommand* Parser::parseSingleCommand() {
-    std::vector<std::string> argv;
+    ParsedCommand parsed = parseCommandBody();
+    return factory_.create(parsed);
+}
 
-    while (check(TokenType::WORD)) {
-        argv.push_back(peek().text);
+ParsedCommand Parser::parseCommandBody() {
+    if (!check(TokenType::WORD)) {
+        throw ParseExeptions("Ocekivan naziv komande");
+    }
+
+    ParsedCommand cmd;
+    cmd.name = peek().text;
+    advance();
+
+    // opciona opcija, oblika "-nesto" (npr. -w, -c, -n10)
+    if (check(TokenType::WORD) && !peek().text.empty() && peek().text[0] == '-') {
+        cmd.option = peek().text.substr(1); // bez '-' na pocetku
         advance();
     }
 
-    if (argv.empty()) {
-        throw ParseException("Prazna komanda u pipeline-u");
+    // opcioni argument
+    if (check(TokenType::WORD)) {
+        cmd.argument = peek().text;
+        cmd.isQuoted = peek().quoted;
+        advance();
     }
 
-    return CommandFactory::create(argv);
+    return cmd;
 }
-

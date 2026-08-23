@@ -4,6 +4,9 @@
 
 #ifndef OOP1PROJEKAT_PIPELINECOMMAND_H
 #define OOP1PROJEKAT_PIPELINECOMMAND_H
+#include "BaseCommand.h"
+
+
 class PipelineCommand:public BaseCommand {
 
 public:
