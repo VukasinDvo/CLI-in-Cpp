@@ -14,4 +14,7 @@ add_executable(OOP1projekat main.cpp ${SOURCES}
         src/Commands/DateCommand.cpp
         src/Commands/CommandHeader.h
         src/Commands/WcCommand.h
-        src/Commands/WcCommand.cpp)
+        src/Commands/WcCommand.cpp
+        src/Commands/PromptCommand.cpp
+        src/CLI/Interpreter.cpp
+        src/CLI/Interpreter.h)

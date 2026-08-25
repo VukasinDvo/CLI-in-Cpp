@@ -15,11 +15,12 @@ CommandFactory::CommandFactory() {
     commands["date"]=&DateCommand::create;
     commands["touch"]=&TouchCommand::create;
     commands["wc"]=&WcCommand::create;
-}
+    commands["prompt"]=&PromptCommand::create;
+};
 BaseCommand* CommandFactory::create(const ParsedCommand& parsed) const {
     auto it = commands.find(parsed.name);
     if (it == commands.end()) {
         throw UnknownCommandException(parsed.name);
     }
     return it->second(parsed);
-}
+};

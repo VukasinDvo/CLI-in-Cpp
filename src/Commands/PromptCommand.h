@@ -14,10 +14,13 @@ class PromptCommand : public BaseCommand {
     PromptCommand(std::vector<std::string> args);
     void execute() override;
 
-    static BaseCommand* create(ParsedCommand parsed,
-                               std::unique_ptr<std::istream> in,
-                               std::unique_ptr<std::ostream> out) {
-        return new PromptCommand(std::move(parsed), std::move(in), std::move(out));
+    static BaseCommand* create(ParsedCommand parsed) {
+        return new PromptCommand(std::move(parsed), nullptr, nullptr);
     }
+
+    static std::string getPrompt();
+
+private:
+    static std::string prompt;
 };
 #endif //OOP1PROJEKAT_PROMPTCOMMAND_H

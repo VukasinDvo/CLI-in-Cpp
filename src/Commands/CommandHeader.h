@@ -10,6 +10,7 @@
 #include "DateCommand.h"
 #include "TouchCommand.h"
 #include "WcCommand.h"
+#include "PromptCommand.h"
 
 
 #endif //OOP1PROJEKAT_COMMANDS_H
