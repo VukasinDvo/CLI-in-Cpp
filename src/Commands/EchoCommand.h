@@ -6,6 +6,8 @@
 #define OOP1PROJEKAT_ECHOCOMMAND_H
 #include <string>
 #include <vector>
+#include "../IOResolver/InputResolver.h"
+#include "../IOResolver/OutputResolver.h"
 
 #include "../Command/BaseCommand.h"
 
@@ -15,8 +17,10 @@ public:
 
     using BaseCommand::BaseCommand;
     void execute() override;
-    static BaseCommand* create(ParsedCommand parsed,std::unique_ptr<std::istream> in,std::unique_ptr<std::ostream> out) {
-        return new EchoCommand(std::move(parsed), std::move(in), std::move(out));
+    static BaseCommand* create(ParsedCommand parsed) {
+        auto input = InputResolver::resolve(parsed);
+        auto output = OutputResolver::resolve(parsed);
+        return new EchoCommand(std::move(parsed), std::move(input), std::move(output));
     }
 };
 #endif //OOP1PROJEKAT_ECHOCOMMAND_H

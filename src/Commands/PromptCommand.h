@@ -4,10 +4,20 @@
 
 #ifndef OOP1PROJEKAT_PROMPTCOMMAND_H
 #define OOP1PROJEKAT_PROMPTCOMMAND_H
+#include <string>
+#include <vector>
+#include "../Command/BaseCommand.h"
 
 class PromptCommand : public BaseCommand {
     public:
+    using BaseCommand::BaseCommand;
     PromptCommand(std::vector<std::string> args);
     void execute() override;
+
+    static BaseCommand* create(ParsedCommand parsed,
+                               std::unique_ptr<std::istream> in,
+                               std::unique_ptr<std::ostream> out) {
+        return new PromptCommand(std::move(parsed), std::move(in), std::move(out));
+    }
 };
 #endif //OOP1PROJEKAT_PROMPTCOMMAND_H

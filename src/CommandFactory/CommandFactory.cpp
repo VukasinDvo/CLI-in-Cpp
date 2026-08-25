@@ -6,20 +6,20 @@
 #include "../IOResolver/InputResolver.h"
 #include "../IOResolver/OutputResolver.h"
 
-#include "../Commands/EchoCommand.h"
+#include "../Commands/CommandHeader.h"
 #include "../Exeptions/CommandExeptions.h"
 
 CommandFactory::CommandFactory() {
     commands["echo"]=&EchoCommand::create;
+    commands["time"]=&TimeCommand::create;
+    commands["date"]=&DateCommand::create;
+    commands["touch"]=&TouchCommand::create;
+    commands["wc"]=&WcCommand::create;
 }
 BaseCommand* CommandFactory::create(const ParsedCommand& parsed) const {
     auto it = commands.find(parsed.name);
     if (it == commands.end()) {
         throw UnknownCommandException(parsed.name);
     }
-
-    auto input = InputResolver::resolve(parsed);
-    auto output = OutputResolver::resolve(parsed);
-
-    return it->second(parsed, std::move(input), std::move(output));
+    return it->second(parsed);
 }

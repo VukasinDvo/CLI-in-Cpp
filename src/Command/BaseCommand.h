@@ -17,7 +17,7 @@
 
 class BaseCommand {
 public:
-    using FunWraper=std::function<BaseCommand*(ParsedCommand, std::unique_ptr<std::istream>, std::unique_ptr<std::ostream>)>;
+    using FunWraper = std::function<BaseCommand*(ParsedCommand)>;
     BaseCommand(ParsedCommand parsed,
                 std::unique_ptr<std::istream> ownedInput,
                 std::unique_ptr<std::ostream> ownedOutput);
