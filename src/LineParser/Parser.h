@@ -19,7 +19,7 @@ public:
     BaseCommand* parseCmd(const std::string& line);
 
 private:
-    CommandFactory& factory_;
+    CommandFactory& factory;
     std::vector<Token> tokens;
     size_t pos;
 

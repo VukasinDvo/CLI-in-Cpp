@@ -52,7 +52,7 @@ BaseCommand* Parser::parsePipeline() {
 
 BaseCommand* Parser::parseSingleCommand() {
     ParsedCommand parsed = parseCommandBody();
-    return factory_.create(parsed);
+    return factory.create(parsed);
 }
 
 ParsedCommand Parser::parseCommandBody() {

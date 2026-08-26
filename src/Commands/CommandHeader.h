@@ -11,6 +11,8 @@
 #include "TouchCommand.h"
 #include "WcCommand.h"
 #include "PromptCommand.h"
+#include "TurnicateCommand.h"
+#include "RmCommand.h"
 
 
 #endif //OOP1PROJEKAT_COMMANDS_H

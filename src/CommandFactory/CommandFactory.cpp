@@ -16,6 +16,8 @@ CommandFactory::CommandFactory() {
     commands["touch"]=&TouchCommand::create;
     commands["wc"]=&WcCommand::create;
     commands["prompt"]=&PromptCommand::create;
+    commands["turnicate"]=&TurnicateCommand::create;
+    commands["rm"]=&RmCommand::create;
 };
 BaseCommand* CommandFactory::create(const ParsedCommand& parsed) const {
     auto it = commands.find(parsed.name);

@@ -17,4 +17,8 @@ add_executable(OOP1projekat main.cpp ${SOURCES}
         src/Commands/WcCommand.cpp
         src/Commands/PromptCommand.cpp
         src/CLI/Interpreter.cpp
-        src/CLI/Interpreter.h)
+        src/CLI/Interpreter.h
+        src/Commands/RmCommand.cpp
+        src/Commands/RmCommand.h
+        src/Commands/TurnicateCommand.cpp
+        src/Commands/TurnicateCommand.h)
