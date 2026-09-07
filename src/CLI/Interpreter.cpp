@@ -16,7 +16,7 @@ void Interpreter::run() {
     // Print initial prompt before waiting for input
     output << PromptCommand::getPrompt() << " ";
 
-    while (readLine(line)) {
+    while (std::getline(input, line)) {
         try {
             BaseCommand* cmd = parser.parseCmd(line);
             if (cmd) {
@@ -24,14 +24,11 @@ void Interpreter::run() {
                 delete cmd;
             }
         } catch (const std::exception& e) {
-            output << "Greska: " << e.what() << "\n";
+            output << "Greska: " << e.what();
         }
 
-        // Print prompt for the next iteration
-        output << PromptCommand::getPrompt() << " ";
+        output<<"\n";
+        output << PromptCommand::getPrompt();
     }
 }
 
-bool Interpreter::readLine(std::string &line) {
-    return static_cast<bool>(std::getline(input, line));
-}

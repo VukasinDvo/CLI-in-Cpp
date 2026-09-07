@@ -33,6 +33,9 @@ std::string Tokenizer::readQuotedString(char quote) {
             result += line[pos++];
         }
     }
+    if (pos<line.size()) {
+        pos++;
+    }
     return result;
 
 }
@@ -87,6 +90,13 @@ std::vector<Token> Tokenizer::tokenize() {
             "<", false});
             pos++;
             continue; }
+
+        if (c == '-') {
+            tokens.push_back({TokenType::DASH, "-", false});
+            pos++;
+            continue;
+        }
+
 
         bool wasQuoted = (c == '"' || c == '\'');
         tokens.push_back({TokenType::WORD, readWord(), wasQuoted});

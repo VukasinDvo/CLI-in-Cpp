@@ -14,5 +14,5 @@ void PromptCommand::execute() {
 
 }
 std::string PromptCommand::getPrompt() {
-    return PromptCommand::prompt;
+    return prompt;
 }

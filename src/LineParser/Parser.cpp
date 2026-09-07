@@ -11,7 +11,7 @@
 #include "../Exeptions/ParseExeptions.h"
 
 Parser::Parser(CommandFactory& factory)
-    : factory_(factory), pos(0) {}
+    : factory(factory), pos(0) {}
 
 BaseCommand* Parser::parseCmd(const std::string& line) {
     Tokenizer tokenizer(line);
@@ -64,17 +64,29 @@ ParsedCommand Parser::parseCommandBody() {
     cmd.name = peek().text;
     advance();
 
-    // opciona opcija, oblika "-nesto" (npr. -w, -c, -n10)
-    if (check(TokenType::WORD) && !peek().text.empty() && peek().text[0] == '-') {
-        cmd.option = peek().text.substr(1); // bez '-' na pocetku
-        advance();
-    }
+    while (!check(TokenType::END) && !check(TokenType::PIPE)) {
+        if (check(TokenType::DASH)) {
+            advance();
+            if (!check(TokenType::WORD)) {
+                throw ParseExeptions("Ocekivana opcija posle '-'");
+            }
+            cmd.option = peek().text;
+            advance();
+            continue;
+        }
 
-    // opcioni argument
-    if (check(TokenType::WORD)) {
-        cmd.argument = peek().text;
-        cmd.isQuoted = peek().quoted;
-        advance();
+        if (check(TokenType::WORD)) {
+            if (!cmd.argument.has_value()) {
+                cmd.argument = peek().text;
+                cmd.isQuoted = peek().quoted;
+            } else {
+                cmd.extraArguments.push_back(peek().text);
+            }
+            advance();
+            continue;
+        }
+
+        break;
     }
 
     return cmd;

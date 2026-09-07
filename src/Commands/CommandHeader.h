@@ -13,6 +13,7 @@
 #include "PromptCommand.h"
 #include "TurnicateCommand.h"
 #include "RmCommand.h"
+#include "TrCommand.h"
 
 
 #endif //OOP1PROJEKAT_COMMANDS_H

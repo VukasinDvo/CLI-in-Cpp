@@ -13,6 +13,7 @@ enum class TokenType {
     REDIRECT_IN,
     REDIRECT_OUT,
     REDIRECT_APPEND,
+    DASH,
     END,
 };
 

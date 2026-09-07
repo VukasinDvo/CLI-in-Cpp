@@ -21,4 +21,8 @@ add_executable(OOP1projekat main.cpp ${SOURCES}
         src/Commands/RmCommand.cpp
         src/Commands/RmCommand.h
         src/Commands/TurnicateCommand.cpp
-        src/Commands/TurnicateCommand.h)
+        src/Commands/TurnicateCommand.h
+        src/Commands/TrCommand.cpp
+        src/Commands/TrCommand.h
+        src/Commands/HeadCommand.cpp
+        src/Commands/HeadCommand.h)
