@@ -30,6 +30,7 @@ private:
     const Token& peek() const;
     bool check(TokenType t) const;
     void advance();
+    bool isEndOfLine() const;
 };
 
 #endif //OOP1PROJEKAT_PARSER_H

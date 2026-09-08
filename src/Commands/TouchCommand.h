@@ -11,6 +11,8 @@ class TouchCommand :public BaseCommand {
   public:
   using BaseCommand::BaseCommand;
   void execute() override;
+    bool hasInput() const override{return false;}
+
     static BaseCommand* create(ParsedCommand parsed) {
         auto output = OutputResolver::resolve(parsed);
         return new TouchCommand(std::move(parsed), nullptr, std::move(output));

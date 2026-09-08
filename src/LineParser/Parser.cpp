@@ -75,6 +75,38 @@ ParsedCommand Parser::parseCommandBody() {
             continue;
         }
 
+        if (check(TokenType::REDIRECT_IN)) {
+            advance();
+            if (!check(TokenType::WORD)) {
+                throw ParseExeptions("Ocekivano ime fajla posle '<'");
+            }
+            cmd.inputRedirectFile = peek().text;
+            advance();
+            continue;
+        }
+
+        if (check(TokenType::REDIRECT_OUT)) {
+            advance();
+            if (!check(TokenType::WORD)) {
+                throw ParseExeptions("Ocekivano ime fajla posle '>'");
+            }
+            cmd.outputRedirectFile = peek().text;
+            cmd.appendOutput = false;
+            advance();
+            continue;
+        }
+
+        if (check(TokenType::REDIRECT_APPEND)) {
+            advance();
+            if (!check(TokenType::WORD)) {
+                throw ParseExeptions("Ocekivano ime fajla posle '>>'");
+            }
+            cmd.outputRedirectFile = peek().text;
+            cmd.appendOutput = true;
+            advance();
+            continue;
+        }
+
         if (check(TokenType::WORD)) {
             if (!cmd.argument.has_value()) {
                 cmd.argument = peek().text;

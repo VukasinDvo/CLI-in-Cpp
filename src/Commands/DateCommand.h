@@ -11,6 +11,11 @@ class DateCommand:public BaseCommand {
     public:
     using BaseCommand::BaseCommand;
     void execute() noexcept override;
+
+    bool hasOutput() const override{return false;}
+
+
+
     static BaseCommand* create(ParsedCommand parsed) {
         auto output = OutputResolver::resolve(parsed);
         return new DateCommand(std::move(parsed), nullptr, std::move(output));

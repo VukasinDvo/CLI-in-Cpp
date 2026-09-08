@@ -9,6 +9,7 @@ class TurnicateCommand:public BaseCommand {
 public:
     using BaseCommand::BaseCommand;
     void execute() override;
+    bool hasInput() const override{return false;}
 
     static BaseCommand* create(ParsedCommand parsed) {
         return new TurnicateCommand(std::move(parsed), nullptr, nullptr);

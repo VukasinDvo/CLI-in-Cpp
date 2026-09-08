@@ -10,6 +10,7 @@ class RmCommand:public BaseCommand {
     public:
     using BaseCommand::BaseCommand;
     void execute() override;
+    bool hasInput() const override{return false;}
 
     static BaseCommand* create(ParsedCommand parsed) {
         return new RmCommand(std::move(parsed), nullptr, nullptr);

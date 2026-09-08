@@ -14,5 +14,9 @@ struct ParsedCommand {
     std::optional<std::string> argument;
     bool isQuoted=false;
     std::vector<std::string> extraArguments;
+
+    std::optional<std::string> inputRedirectFile;
+    std::optional<std::string> outputRedirectFile;
+    bool appendOutput = false;
 };
 #endif //OOP1PROJEKAT_PARSEDCOMMAND_H

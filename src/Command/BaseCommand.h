@@ -25,10 +25,17 @@ public:
     virtual ~BaseCommand() = default;
     virtual void execute() = 0;
 
+    void setInputStream(std::istream* in) { inputStream = in; }
+    void setOutputStream(std::ostream* out) { outputStream = out; }
+
+    virtual bool hasInput() const { return true; }
+    virtual bool hasOutput() const { return true; }
+
 protected:
     ParsedCommand parsed;
     std::istream* inputStream;
     std::ostream* outputStream;
+
 
 private:
     std::unique_ptr<std::istream> ownedInput;

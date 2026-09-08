@@ -17,5 +17,21 @@ PipelineCommand::~PipelineCommand() {
 }
 
 void PipelineCommand::execute() {
+    std::vector<std::unique_ptr<std::stringstream>> buffer;
 
+}
+
+void PipelineCommand::validateCommandPositions() {
+    for (int i=0; i<commands.size(); i++) {
+        bool isFirst= (i==0);
+        bool isLast = (i == commands.size() - 1);
+        if (!isFirst && !commands[i]->hasInput()) {
+            throw PipelineExeptions(
+                "Komanda bez ulaznog toka ne moze biti u sredini/na kraju pipeline-a");
+        }
+        if (!isLast && !commands[i]->hasOutput()) {
+            throw PipelineExeptions(
+                "Komanda bez izlaznog toka ne moze biti na pocetku/u sredini pipeline-a");
+        }
+    }
 }

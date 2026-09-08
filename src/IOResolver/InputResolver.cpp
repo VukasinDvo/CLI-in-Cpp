@@ -9,7 +9,7 @@
 std::unique_ptr<std::istream> InputResolver::resolve(const ParsedCommand& cmd) {
     if (!cmd.argument.has_value()) {
         return nullptr;
-    }//nesto
+    }
 
     if (cmd.isQuoted) {
         return std::make_unique<std::istringstream>(*cmd.argument);

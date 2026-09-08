@@ -25,4 +25,5 @@ add_executable(OOP1projekat main.cpp ${SOURCES}
         src/Commands/TrCommand.cpp
         src/Commands/TrCommand.h
         src/Commands/HeadCommand.cpp
-        src/Commands/HeadCommand.h)
+        src/Commands/HeadCommand.h
+        src/Exeptions/PipelineExeptions.h)

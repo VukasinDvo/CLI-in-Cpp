@@ -17,6 +17,7 @@ public:
 
 private:
     std::vector<BaseCommand*> commands;
+    void validateCommandPositions();
 
 };
 #endif //OOP1PROJEKAT_PIPELINECOMMAND_H
